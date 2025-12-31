@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026個人OKR</title>
+    <style>
+        /* CSS 樣式區 */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f5f6fa;
+            --border-color: #bdc3c7;
+        }
+
+        body {
+            font-family: "Microsoft JhengHei", "Heiti TC", sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* A4 Paper Layout */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+        }
+
+        .meta-info input {
+            border: none;
+            border-bottom: 1px solid #ccc;
+            width: 100px;
+            font-family: inherit;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+        }
+
+        h2 {
+            font-size: 16px;
+            color: white;
+            background-color: var(--primary-color);
+            padding: 5px 10px;
+            margin: -15px -15px 15px -15px;
+            border-radius: 4px 4px 0 0;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .guide-text {
+            font-size: 12px;
+            color: #666;
+            background-color: #eef;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        /* Inputs */
+        textarea {
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px;
+            font-family: inherit;
+            resize: vertical;
+            box-sizing: border-box;
+            background-color: #fafafa;
+        }
+
+        textarea:focus, input:focus {
+            outline: 2px solid var(--accent-color);
+            background-color: white;
+        }
+
+        /* Objective Section */
+        .checklist {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 13px;
+            background: #f9f9f9;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        /* KR Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            background-color: #eee;
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ddd;
+            vertical-align: middle;
+        }
+
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            vertical-align: top;
+        }
+
+        .kr-input {
+            width: 98%;
+            height: 60px;
+        }
+
+        .partner-input {
+            width: 95%;
+            height: 25px;
+            margin-bottom: 5px;
+        }
+        
+        input[type="number"] {
+            width: 50px;
+        }
+
+        /* Health Check */
+        .health-check-item {
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .health-check-item label {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .tag-pill {
+            background: #3498db;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            white-space: nowrap;
+        }
+
+        /* Footer Quote */
+        .footer-quote {
+            text-align: center;
+            font-style: italic;
+            color: #555;
+            margin-top: 20px;
+            font-size: 14px;
+            border-top: 1px dashed #ccc;
+            padding-top: 10px;
+        }
+
+        /* Action Buttons (Hidden on Print) */
+        .actions {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--accent-color);
+        }
+
+        .btn-reset {
+            background-color: #e74c3c;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                min-height: auto;
+                padding: 0;
+            }
+            .actions {
+                display: none;
+            }
+            textarea {
+                border: none;
+                resize: none;
+                padding: 0;
+                background: none;
+            }
+            input {
+                background: none;
+                border: none;
+            }
+            .guide-text {
+                background-color: #f0f0f0; /* Keep gray for readability */
+                color: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="actions">
+        <button onclick="window.print()">🖨️ 儲存為 PDF / 列印</button>
+        <button class="btn-reset" onclick="resetForm()">🔄 清除重填</button>
+    </div>
+
+    <div class="page">
+        <header>
+            <h1>2026個人OKR</h1>
+            <div class="meta-info">
+                <div>姓名：<input type="text" id="name" placeholder="輸入姓名"></div>
+                <div>部門：<input type="text" id="dept" placeholder="輸入部門"></div>
+                <div>日期：<input type="text" id="date" placeholder="YYYY/MM/DD"></div>
+            </div>
+        </header>
+
+        <section>
+            <h2>Part 1：設定視野目標 (Objective)</h2>
+            <div class="guide-text">
+                <strong>核心提問：</strong> 2026 年，你想帶領自己或團隊到達什麼樣的「新境界」？<br>
+                <strong>思考策略：</strong> 運用【6大視角】與【4大縱深】。避免單純數字，要有鼓舞性。
+            </div>
+            <textarea id="objective" rows="3" placeholder="我的目標 (O)：請用一句話描述，具備鼓舞人心、方向明確的特質..."></textarea>
+            
+            <div class="checklist">
+                <strong style="align-self: center;">O 的自我檢核：</strong>
+                <label><input type="checkbox" id="check_impact"> 具備市場/業務影響力</label>
+                <label><input type="checkbox" id="check_challenge"> 具備挑戰度</label>
+                <label><input type="checkbox" id="check_link"> 已連結上級目標</label>
+            </div>
+        </section>
+
+        <section>
+            <h2>Part 2：關鍵結果 (Key Results) —— 價值導向</h2>
+            <div class="guide-text">
+                <strong>寫作公式：</strong> 執行方法 + 可衡量的產出結果。<br>
+                <strong>提醒：</strong> 不要只寫「做了什麼」(任務)，要寫「產生了什麼改變」(價值)。
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 55%;">關鍵結果 (KR)</th>
+                        <th style="width: 10%;">挑戰度<br>(1-5)</th>
+                        <th style="width: 35%;">合夥人 (資源與利益勾兌)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <textarea class="kr-input" id="kr1" placeholder="KR 1：(範例：舉辦5場促銷，貢獻總銷售目標的30%)"></textarea>
+                        </td>
+                        <td><input type="number" id="c1" min="1" max="5"></td>
+                        <td>
+                            <input type="text" class="partner-input" id="p1_who" placeholder="需誰協助：">
+                            <input type="text" class="partner-input" id="p1_benefit" placeholder="利益勾兌(對他的好處)：">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea class="kr-input" id="kr2" placeholder="KR 2：(請具體量化，包含數字或里程碑)"></textarea>
+                        </td>
+                        <td><input type="number" id="c2" min="1" max="5"></td>
+                        <td>
+                            <input type="text" class="partner-input" id="p2_who" placeholder="需誰協助：">
+                            <input type="text" class="partner-input" id="p2_benefit" placeholder="利益勾兌(對他的好處)：">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea class="kr-input" id="kr3" placeholder="KR 3：(KR 不超過 3 個，少就是精)"></textarea>
+                        </td>
+                        <td><input type="number" id="c3" min="1" max="5"></td>
+                        <td>
+                            <input type="text" class="partner-input" id="p3_who" placeholder="需誰協助：">
+                            <input type="text" class="partner-input" id="p3_benefit" placeholder="利益勾兌(對他的好處)：">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Part 3：OKR 體質健檢 (5能力與當責檢視)</h2>
+            <div class="guide-text">
+                在定稿前，請用「農地主 (Owner)」與「合夥人 (Partner)」的身分進行最後確認。
+            </div>
+            
+            <div class="health-check-item">
+                <label>
+                    <input type="checkbox" id="hc1">
+                    <div><span class="tag-pill">業務理解力</span> <strong>邏輯檢查：</strong> 如果這 3 個 KR 都做到了，上面的 O 就一定會達成嗎？有沒有漏掉什麼關鍵拼圖？</div>
+                </label>
+            </div>
+            <div class="health-check-item">
+                <label>
+                    <input type="checkbox" id="hc2">
+                    <div><span class="tag-pill">差異評估力</span> <strong>現況確認：</strong> 針對挑戰度/信心度較低的 KR，你清楚現在缺什麼資源嗎？你的 Plan B 是什麼？</div>
+                </label>
+            </div>
+            <div class="health-check-item">
+                <label>
+                    <input type="checkbox" id="hc3">
+                    <div><span class="tag-pill">他人同理力</span> <strong>合作確認：</strong> 針對需要合作的 KR，你是否確認過對方的優先順序？勾兌是否雙贏？</div>
+                </label>
+            </div>
+            <div class="health-check-item">
+                <label>
+                    <input type="checkbox" id="hc4">
+                    <div><span class="tag-pill">整合執行力</span> <strong>當責心態：</strong> 你是否將自己視為這塊目標田地的「農地主」（負全責），而非「佃農」？</div>
+                </label>
+            </div>
+            <div class="health-check-item">
+                <label>
+                    <input type="checkbox" id="hc5">
+                    <div><span class="tag-pill">未來預測力</span> <strong>趨勢洞察：</strong> 考慮了競爭對手與風險嗎？是「維持現狀」還是「開創新局」？</div>
+                </label>
+            </div>
+        </section>
+
+        <div class="footer-quote">
+            💡 OKR 金句：「如果說不出目標完成後產生的具體影響力，代表這個目標的價值不大，可以捨棄不做。」
+        </div>
+    </div>
+
+    <script>
+        // JS 程式區
+        // 自動保存功能
+        const inputs = document.querySelectorAll('input, textarea');
+        
+        // 載入資料
+        window.addEventListener('load', () => {
+            inputs.forEach(input => {
+                const savedValue = localStorage.getItem(input.id);
+                if (savedValue) {
+                    if (input.type === 'checkbox') {
+                        input.checked = savedValue === 'true';
+                    } else {
+                        input.value = savedValue;
+                    }
+                }
+            });
+            // 設置預設日期
+            if (!document.getElementById('date').value) {
+                const today = new Date().toISOString().split('T')[0].replace(/-/g, '/');
+                document.getElementById('date').value = today;
+            }
+        });
+
+        // 監聽輸入並保存
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                if (input.type === 'checkbox') {
+                    localStorage.setItem(input.id, input.checked);
+                } else {
+                    localStorage.setItem(input.id, input.value);
+                }
+            });
+        });
+
+        // 重置表單
+        function resetForm() {
+            if (confirm('確定要清除所有內容嗎？此動作無法復原。')) {
+                inputs.forEach(input => {
+                    localStorage.removeItem(input.id);
+                    if (input.type === 'checkbox') {
+                        input.checked = false;
+                    } else {
+                        input.value = '';
+                    }
+                });
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
